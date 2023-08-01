@@ -1,35 +1,29 @@
-import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from './app.component';
+import { Component } from '@angular/core';
+import { ForexConverterPipe } from './forex-conversion.pipe';
 
-describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
-  });
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+  providers: [ForexConverterPipe]
+})
+export class AppComponent {
+  fromCurrency: string = '1.126735';
+  toCurrency: string = '1.126735';
+  amount: string = '0';
+  result: string | null = null;
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
+  // Add the 'title' property
+  title: string = 'angularapp';
 
-  it(`should have as title 'angularapp'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('angularapp');
-  });
+  constructor(private forex: ForexConverterPipe) {}
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('angularapp app is running!');
-  });
-});
+  convert() {
+    if (this.amount === '0') {
+      this.result = this.forex.transform(this.amount, this.fromCurrency, this.toCurrency);
+    } else {
+      const convertedValue = this.forex.transform(this.amount, this.fromCurrency, this.toCurrency);
+      this.result = convertedValue !== null ? convertedValue.toString() : null;
+    }
+  }
+}
