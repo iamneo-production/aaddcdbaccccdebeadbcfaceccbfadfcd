@@ -1,22 +1,28 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ForexConverterPipe } from './forex-conversion.pipe';
+import { FormsModule } from '@angular/forms';
+import { CurrencyconvPipe } from './currencyconv.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ForexConverterPipe
+    CurrencyconvPipe
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    AppRoutingModule,
+    FormsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+
 
 
