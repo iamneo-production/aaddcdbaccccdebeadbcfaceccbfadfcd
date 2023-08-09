@@ -6,27 +6,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'pipes';
-  fromCurr :string = '';
-  toCurr   :string = '';
-  amount !:number;
-  result: string = 'sample';
-  show:boolean = false;
+  title = 'angularapp';
+  opt1: number = 0;
+  opt2: number = 0;
+  amt: number = 0;
+  res: string = '';
+  result: string = '';
 
-
-  showResult()
-  {
-    console.log(this.fromCurr);
-    console.log(this.toCurr);
-    console.log(this.amount);
-    if(this.fromCurr !='' && this.toCurr != '')
-    {
-      this.show = true;
+  exchange(a: number, b: number, amt: number): string {
+    if (a !== 0 && b !== 0) {
+      this.result=Math.round(amt/(a/b)).toFixed(2);
+      return this.result;
     }
-    else
-    {
-      this.show = false;
-    }
+    return '';
   }
 }
-
